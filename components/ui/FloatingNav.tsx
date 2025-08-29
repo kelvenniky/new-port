@@ -8,7 +8,6 @@ import {
 } from "motion/react";
 import { cn } from "@/lib/utils";
 
-
 export const FloatingNav = ({
   navItems,
   className,
@@ -21,13 +20,12 @@ export const FloatingNav = ({
   className?: string;
 }) => {
   const { scrollYProgress } = useScroll();
-
   const [visible, setVisible] = useState(false);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     // Check if current is not undefined and is a number
     if (typeof current === "number") {
-      let direction = current! - scrollYProgress.getPrevious()!;
+      const direction = current - scrollYProgress.getPrevious()!; // Change let to const
 
       if (scrollYProgress.get() < 0.05) {
         setVisible(false);
@@ -56,7 +54,7 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "flex max-w-fit  fixed top-10 border-white/[0.2] bg-black-100 inset-x-0 mx-auto border   rounded-full  shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-10  py-5  items-center justify-center space-x-4",
+          "flex max-w-fit fixed top-10 border-white/[0.2] bg-black-100 inset-x-0 mx-auto border rounded-full shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-10 py-5 items-center justify-center space-x-4",
           className
         )}
       >
@@ -69,10 +67,9 @@ export const FloatingNav = ({
             )}
           >
             <span className="block sm:hidden">{navItem.icon}</span>
-            <span className=" !cursor-pointer text-sm">{navItem.name}</span>
+            <span className="!cursor-pointer text-sm">{navItem.name}</span>
           </a>
         ))}
-       
       </motion.div>
     </AnimatePresence>
   );
